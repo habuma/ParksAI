@@ -2,6 +2,16 @@ Parks AI
 ===
 This project contains sample code demonstrating the OpenAI module for Node.js, specifically using Disney Parks as the domain to ask questions about.
 
+Before running any of these scripts, you'll need to obtain an OpenAI API key (see https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) and assign it to an environment variable named `OPENAI_API_KEY`.
+
+You'll also need to install the package dependencies using `npm`:
+
+```
+$ npm install
+```
+
+With the package dependencies installed and the `OPENAI_API_KEY` environment variable set, you should be able to run the scripts.
+
 Park Hours
 ---
 You can use the `parkhours.js` script to ask for tomorrow's park hours. For example:
