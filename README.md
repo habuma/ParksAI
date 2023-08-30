@@ -38,7 +38,7 @@ Note that to keep these examples simple, not all attractions are supported. Only
  - Jungle Cruise
  - Haunted Mansion
  - Matterhorn Bobsleds
- - Pirate of the Caribbean
+ - Pirates of the Caribbean
  - Space Mountain
 
 When to Ride
