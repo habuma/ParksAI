@@ -1,27 +1,14 @@
 'use strict';
 const { OpenAI } = require('openai');
 const axios = require('axios').default;
+const { ATTRACTION_IDS } = require('./data');
+const { logTurn } = require('./logging');
 
 const configuration = {
     // Uncomment if using LocalAI (https://github.com/go-skynet/LocalAI)
     // baseURL: `http://localhost:8080/v1`
 };
 const openai = new OpenAI(configuration);
-
-const ATTRACTION_IDS = {
-    'Jungle Cruise': '1b83fda8-d60e-48e4-9a3d-90ddcbcd1001',
-    'Haunted Mansion': 'ff52cb64-c1d5-4feb-9d43-5dbd429bac81',
-    'Pirates of the Caribbean': '82aeb29b-504a-416f-b13f-f41fa5b766aa',
-    'Big Thunder Mountain': '0de1413a-73ee-46cf-af2e-c491cc7c7d3b',
-    'Space Mountain': '9167db1d-e5e7-46da-a07f-ae30a87bc4c4',
-    'Matterhorn Bobsleds': 'faaa8be9-cc1e-4535-ac20-04a535654bd0'
-};
-
-const logTurn = (index, json) => {
-    console.log(`--------------- Turn ${index} ---------------`);
-    console.log(JSON.stringify(json, null, 2));
-    console.log("--------------------------------------");
-};
 
 const getCurrentWaitTime = async(attractionName) => {
     const attractionId = ATTRACTION_IDS[attractionName];

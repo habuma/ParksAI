@@ -62,4 +62,4 @@ The actual interaction with OpenAI takes place over multiple turns:
  - After calling the local function, the script sends a new prompt, this time including the response from the local function.
  - Finally, OpenAI will respond with the final answer.
 
-When running the scripts you can see the details from each of these turns in the emitted log output.
+When running the scripts you can see the details from each of these turns in the emitted log output by setting either the `DEBUG` environment variable (which also enables debug logging for the OpenAI module) or the `DEBUG_TURNS` environment variable (which only enables debug logging for these scripts).

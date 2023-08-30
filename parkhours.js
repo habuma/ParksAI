@@ -1,27 +1,14 @@
 'use strict';
 const { OpenAI } = require('openai');
 const axios = require('axios').default;
+const { PARK_IDS } = require('./data');
+const { logTurn } = require('./logging');
 
 const configuration = {
     // Uncomment if using LocalAI (https://github.com/go-skynet/LocalAI)
     // baseURL: `http://localhost:8080/v1`
 };
 const openai = new OpenAI(configuration);
-
-const PARK_IDS = {
-    'Magic Kingdom': '75ea578a-adc8-4116-a54d-dccb60765ef9',
-    'Epcot': '47f90d2c-e191-4239-a466-5892ef59a88b',
-    'Hollywood Studios': '288747d1-8b4f-4a64-867e-ea7c9b27bad8',
-    'Animal Kingdom': '1c84a229-8862-4648-9c71-378ddd2c7693',
-    'Disneyland': '7340550b-c14d-4def-80bb-acdb51d49a66',
-    'Disney California Adventure': '832fcd51-ea19-4e77-85c7-75d5843b127c'
-};
-
-const logTurn = (index, json) => {
-    console.log(`--------------- Turn ${index} ---------------`);
-    console.log(JSON.stringify(json, null, 2));
-    console.log("--------------------------------------");
-};
 
 const getParkHours = async(parkName, date = 'today') => {
     const parkId = PARK_IDS[parkName];
@@ -49,7 +36,20 @@ const getParkHours = async(parkName, date = 'today') => {
         return schedItem.date === filterDate;
     });
 
-    return JSON.stringify(dataForDate);
+    const parkHoursData = {};
+    dataForDate.forEach(schedItem => {
+        const hours = {
+            openingTime: schedItem.openingTime,
+            closingTime: schedItem.closingTime
+        };
+        var type = schedItem.description ? schedItem.description : schedItem.type;
+        if (type === 'OPERATING') {
+            type = 'Regular Park Hours';
+        }
+        parkHoursData[type] = hours;
+    });
+
+    return JSON.stringify(parkHoursData);
 }
 
 const askForParkHours = async (parkName) => {
