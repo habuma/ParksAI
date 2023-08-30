@@ -87,7 +87,7 @@ const askForWaitTime = async (attractionName) => {
     });
 
     const followupPrompt = {
-        model: 'gpt-3.5-turbo-0613',
+        model: 'gpt-3.5-turbo',
         messages: messages
     };
     logTurn(3, followupPrompt);
